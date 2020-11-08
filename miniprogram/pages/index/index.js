@@ -1,5 +1,5 @@
 import {
-    get
+    get,getLikeMenu
 } from "../../utils/db"
 Page({
     data: {
@@ -7,11 +7,13 @@ Page({
         pageSize: 4,
         types: [{
                 src: "../../imgs/index_07.jpg",
-                typename: "营养菜谱"
+                typename: "主食",
+                id:"38597c165fa602df006ba9700907c97c"
             },
             {
                 src: "../../imgs/index_09.jpg",
-                typename: "儿童菜谱"
+                typename: "饮品",
+                id:"b333e0365fa604ea005c775d629ce3cc"
             },
         ],
         recipes: []
@@ -43,19 +45,32 @@ Page({
             //新数据和旧数据进行拼接
         })
     },
-    nav(e) {
+    //跳转到详情页
+    toDetail(e) {
         wx.navigateTo({
             url: '../detail/detail?id=' + e.currentTarget.id,
         })
     },
-    // async onShow() {
-    //     let res = await get("menu", {
-    //         status: 1
-    //     });
-    //     let menuarr = res.data;
-    //     this.setData({
-    //         recipes: menuarr
-    //     })
+    //跳转到菜谱分类页
+    toSort() {
+        wx.navigateTo({
+            url: '../type/type',
+        })
+    },
+    //跳转到关注页面
+      toFollow(e) {
+        
+        wx.navigateTo({
+          url: '../list/list?id='+"follow",
+        })
 
-    // }
+    },
+    //跳转到主食或者饮品页面
+    toFood(e){
+      wx.navigateTo({
+        url: '../list/list?id='+e.currentTarget.id,
+      })
+    }
+
+
 })

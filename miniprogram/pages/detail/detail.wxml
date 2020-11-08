@@ -1,6 +1,6 @@
 <view>
   <!-- swiper轮播图 -->
-  <swiper class="swiper" indicator-dots="{{ true }}" indicator-color="#fff" indicator-active-color="#eb9834">
+  <swiper class="swiper" indicator-dots="{{ true }}" indicator-color="#fff" indicator-active-color="#eb9834" autoplay="true" circular="true">
     <block wx:for="{{ imgs }}" data-url="{{item}}" bindtap="previewImage">
       <swiper-item>
         <image src="{{ item }}"></image>

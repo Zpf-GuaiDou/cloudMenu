@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userImg:"",
     //定义存储用户的信息
     userInfo: {},
     //定义切换功能菜单下标
@@ -29,11 +30,19 @@ Page({
     } else {
       this.data.isLogin = true
     }
+   //用户
+   var avatarUrl=await wx.getStorage({
+     key: 'avatarUrl',
+   })
+   var userImg= avatarUrl.data
+   
 
     //菜谱
     {
       //获取菜谱数据
-      var openid = wx.getStorageSync("openid"); //获取缓存的openid
+      var openid = wx.getStorageSync("openid"); 
+     
+      //获取缓存的openid
       //菜单列表
       var menuresult = await get("menu", {
         _openid: openid
@@ -89,7 +98,8 @@ Page({
       isLogin: this.data.isLogin,
       recipes,
       types,
-      lists
+      lists,
+      userImg
     })
     //获取用户登录信息
     if (app.globalData.userInfo != null) {
@@ -109,11 +119,16 @@ Page({
   },
   //判断是否获取用户信息
   getInfo(e) {
-    // console.log(e);
+    var avatarUrl=e.detail.userInfo.avatarUrl
+    wx.setStorage({
+      data: avatarUrl,
+      key: 'avatarUrl',
+    })
     if (e.detail.userInfo !== undefined) {
       this.setData({
         userInfo: e.detail.userInfo,
-        isLogin: true
+        isLogin: true,
+        avatarUrl
       })
     }
   },

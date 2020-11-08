@@ -5,17 +5,17 @@
     </view>
     <!-- 类别名称 -->
     <view class="top-type">
-        <view>
+        <view bindtap="toSort">
             <image src="../../imgs/index_05.jpg"></image>
             <text>菜谱分类</text>
         </view>
         <block wx:for="{{ types }}" wx:key="typename">
-            <view>
+            <view id="{{item.id}}" bindtap="toFood">
                 <image src="{{ item.src }}"></image>
                 <text>{{ item.typename }}</text>
             </view>
         </block>
-        <view>
+        <view bindtap="toFollow">
             <image src="../../imgs/index_11.jpg"></image>
             <text>关注菜谱</text>
         </view>
@@ -30,7 +30,8 @@
         <!-- 菜谱列表 -->
         <view class="hot-recipe-list">
             <block>
-                <view wx:for="{{ recipes }}"class="hot-recipe-list-item"  bindtap="nav" id="{{item._id}}" wx:key='index'>
+                <view wx:for="{{ recipes }}" class="hot-recipe-list-item" bindtap="toDetail" id="{{item._id}}"
+                    wx:key='index'>
                     <!-- 图片 -->
                     <image src="{{ item.image[0]}}"></image>
                     <!-- 名字 -->
@@ -38,7 +39,7 @@
                     <!-- 发布人及浏览次数 -->
                     <view class="hot-recipe-list-item-info">
                         <view class="left">
-                            <image  src="{{item.avatarUrl}}"></image>
+                            <image src="{{item.avatarUrl}}"></image>
                             <text>{{item.nickName}}</text>
                         </view>
                         <view class="right">

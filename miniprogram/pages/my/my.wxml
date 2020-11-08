@@ -8,7 +8,7 @@
     </view>
     <!-- 登录页面 -->
     <view class="login" wx:else>
-      <image src="../../static/my/logo1.jpg"></image>
+      <image src="{{userImg}}"></image>
       <view class="name">
         林中小兔
       </view>
