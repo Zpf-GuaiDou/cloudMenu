@@ -11,7 +11,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //保存用户的头像
     userImg:"",
+    //保存用户的名字
+    userName:"",
     //定义存储用户的信息
     userInfo: {},
     //定义切换功能菜单下标
@@ -23,84 +26,90 @@ Page({
     lists: [],
   },
   //页面加载
-  async onShow() {
+  async onLoad() {
     let userInfo = app.globalData.userInfo;
     if (userInfo == null) {
       this.data.isLogin = false
     } else {
       this.data.isLogin = true
     }
-   //用户
-   var avatarUrl=await wx.getStorage({
-     key: 'avatarUrl',
-   })
-   var userImg= avatarUrl.data
+    // //菜谱
+    // {
+    //     //获取缓存的openid
+    //   var openid = wx.getStorageSync("openid"); 
+    //   //菜单列表
+    //   var menuresult = await get("menu", {
+    //     _openid: openid
+    //   });
+    //   //存贮菜单的内容
+    //   var recipes = menuresult.data
+    // }
+    // //分类
+    // {
+    //   var menulist = await get("class", {
+    //     _openid: openid
+    //   })
+      
+    //   //存贮分类的内容
+    //   var types = menulist.data
+    // }
+    // //关注
+    // {
+    //   //获取我添加的菜单
+    //   var openid = wx.getStorageSync('openid')
+    //   var result = await get('likes', {
+    //     _openid: openid
+    //   })
+    //   var arr = result.data.map(item => {
+    //     return item.menuId
+    //   })
+    //   //根据menuid查询memu集合，获取菜谱的信息
+    //   var followresult = await getLikeMenu(arr)
+    //   //存贮我关注的菜单
+    //   var lists = followresult.data; //关注菜谱列表
+    //   // console.log(lists);
+      
+    //   lists.forEach(item=>{
+    //     if(item.views==0){
+    //       item.star=0;
+    //     }else if(item.views>0 && item.views<=10){
+    //       item.star=1;
+    //     }else if(item.views>10 && item.views<=20){
+    //       item.star=2;
+    //     }else if(item.views>20 && item.views<=30){
+    //       item.star=3;
+    //     }else if(item.views>30 && item.views<=40){
+    //       item.star=4;
+    //     }else{
+    //       item.star=5
+    //     }
+    //   })
+    // }
+    //获取用户头像和名字
+    // {
+    //   var avatarUrl=await wx.getStorage({
+    //     key: 'avatarUrl',
+    //   })
+    //   var nickName=await wx.getStorage({
+    //     key: 'nickName',
+    //   })
+    //   var userName=nickName.data
+    //   var userImg= avatarUrl.data
+    //  }
    
 
-    //菜谱
-    {
-      //获取菜谱数据
-      var openid = wx.getStorageSync("openid"); 
-     
-      //获取缓存的openid
-      //菜单列表
-      var menuresult = await get("menu", {
-        _openid: openid
-      });
-      //存贮菜单的内容
-      var recipes = menuresult.data
-    }
-    //分类
-    {
-      var menulist = await get("class", {
-        _openid: openid
-      })
-      
-      //存贮分类的内容
-      var types = menulist.data
-    }
-    //关注
-    {
-      //获取我添加的菜单
-      var openid = wx.getStorageSync('openid')
-      var result = await get('likes', {
-        _openid: openid
-      })
-      var arr = result.data.map(item => {
-        return item.menuId
-      })
-      //根据menuid查询memu集合，获取菜谱的信息
-      var followresult = await getLikeMenu(arr)
-      //存贮我关注的菜单
-      var lists = followresult.data; //关注菜谱列表
-      // console.log(lists);
-      
-      lists.forEach(item=>{
-        if(item.views==0){
-          item.star=0;
-        }else if(item.views>0 && item.views<=10){
-          item.star=1;
-        }else if(item.views>10 && item.views<=20){
-          item.star=2;
-        }else if(item.views>20 && item.views<=30){
-          item.star=3;
-        }else if(item.views>30 && item.views<=40){
-          item.star=4;
-        }else{
-          item.star=5
-        }
-      })
-    }
+
 
 //把数据展示出来
-    this.setData({
-      userInfo,
-      isLogin: this.data.isLogin,
-      recipes,
-      types,
-      lists,
-      userImg
-    })
+    // this.setData({
+    //   userInfo,
+    //   isLogin: this.data.isLogin,
+    //   recipes,
+    //   types,
+    //   lists,
+    //   // userImg,
+    //   // userName
+    // })
     //获取用户登录信息
     if (app.globalData.userInfo != null) {
       this.setData({
@@ -117,18 +126,94 @@ Page({
       }
     }
   },
+  async onShow(){
+    let userInfo = app.globalData.userInfo;
+ //菜谱
+ {
+  //获取缓存的openid
+var openid = wx.getStorageSync("openid"); 
+//菜单列表
+var menuresult = await get("menu", {
+  _openid: openid
+});
+//存贮菜单的内容
+var recipes = menuresult.data
+}
+//分类
+{
+var menulist = await get("class", {
+  _openid: openid
+})
+
+//存贮分类的内容
+var types = menulist.data
+}
+//关注
+{
+//获取我添加的菜单
+var openid = wx.getStorageSync('openid')
+var result = await get('likes', {
+  _openid: openid
+})
+var arr = result.data.map(item => {
+  return item.menuId
+})
+//根据menuid查询memu集合，获取菜谱的信息
+var followresult = await getLikeMenu(arr)
+//存贮我关注的菜单
+var lists = followresult.data; //关注菜谱列表
+// console.log(lists);
+
+lists.forEach(item=>{
+  if(item.views==0){
+    item.star=0;
+  }else if(item.views>0 && item.views<=10){
+    item.star=1;
+  }else if(item.views>10 && item.views<=20){
+    item.star=2;
+  }else if(item.views>20 && item.views<=30){
+    item.star=3;
+  }else if(item.views>30 && item.views<=40){
+    item.star=4;
+  }else{
+    item.star=5
+  }
+})
+}
+//把数据展示出来
+this.setData({
+  userInfo,
+  isLogin: this.data.isLogin,
+  recipes,
+  types,
+  lists,
+  // userImg,
+  // userName
+})
+  },     
   //判断是否获取用户信息
-  getInfo(e) {
-    var avatarUrl=e.detail.userInfo.avatarUrl
-    wx.setStorage({
-      data: avatarUrl,
-      key: 'avatarUrl',
-    })
+   getInfo(e) {
+
+  //存储用户头像和名字
+  // {   
+  //   var nickName=e.detail.userInfo.nickName
+  //   var avatarUrl=e.detail.userInfo.avatarUrl
+  //   wx.setStorage({
+  //     data: avatarUrl,
+  //     key: 'avatarUrl',
+  //   })
+  //   wx.setStorage({
+  //     data: nickName,
+  //     key: 'nickName',
+  //   })
+  // }
+ 
+
+    
     if (e.detail.userInfo !== undefined) {
       this.setData({
         userInfo: e.detail.userInfo,
         isLogin: true,
-        avatarUrl
       })
     }
   },
@@ -169,5 +254,6 @@ Page({
       title: "删除提示",
       content: "确定要删除么？",
     })
+
   }
 })

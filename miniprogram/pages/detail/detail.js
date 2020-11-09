@@ -20,9 +20,15 @@ Page({
     allow:true,   // 关注的操作:true允许操作; false 不允许
   },
   async onLoad(e) {
+
     //获取菜谱id
     this.data.id = e.id;
     this.getDetail()
+   
+    //改变标题名称
+    // wx.setNavigationBarTitle({
+    //   title:this.data.detail.name
+    // })
     //判断是否关注
     var openid = wx.getStorageSync('openid');
     var menuId = this.data.id;
@@ -85,14 +91,13 @@ Page({
 			// console.log(res)
 			//1.menu中like减1
 			var result =await incLike("menu",this.data.id,-1).catch(err=>console.log(err))
-			//2 页面减少
+     this.data.allow=true;
+      //2 页面减少
 			this.data.detail.likes-=1;
 			this.setData({
 				detail:this.data.detail,
 				isLike:false
-			})
-			
-			
+      })
 		})
 		.catch(err=>{
 			console.log(err)
@@ -109,6 +114,9 @@ Page({
    this.setData({
      detail: res.data,
      imgs: res.data.image
+   })
+   wx.setNavigationBarTitle({
+     title:this.data.detail.name
    })
   },
   //图片全屏预览

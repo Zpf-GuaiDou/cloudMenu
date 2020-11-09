@@ -7,7 +7,7 @@
   <!-- 分类列表 -->
   <view class="type-list">
     <block wx:for="{{ types }}">
-      <view class="list-item">
+      <view class="list-item" bindtap="toTypeList" id="{{item._id}}">
         <image src="{{ item.src }}"></image>
         <text>{{ item.name }}</text>
       </view>

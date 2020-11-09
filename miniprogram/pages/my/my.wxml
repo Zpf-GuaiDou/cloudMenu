@@ -8,9 +8,9 @@
     </view>
     <!-- 登录页面 -->
     <view class="login" wx:else>
-      <image src="{{userImg}}"></image>
+      <image src="../../static/my/logo2.jpg"></image>
       <view class="name">
-        林中小兔
+     已登录
       </view>
     </view>
   </view>
@@ -108,9 +108,9 @@
               </view>
               <view class="xing">
                 <!-- 星星 -->
-                <image wx:for="{{item.star}}" style="width:30rpx;height:30rpx;" mode="aspectFill" src="../../static/list/star-yellow.png"></image>
+                <image wx:for="{{item.star}}" wx:key="*this" style="width:30rpx;height:30rpx;" mode="aspectFill" src="../../static/list/star-yellow.png"></image>
 				
-        <image wx:for="{{5-item.star}}" style="width:30rpx;height:30rpx;"  mode="aspectFill" src="../../static/list/star-gray.png"></image>
+        <image wx:for="{{5-item.star}}" wx:key="*this" style="width:30rpx;height:30rpx;"  mode="aspectFill" src="../../static/list/star-gray.png"></image>
        
        
        

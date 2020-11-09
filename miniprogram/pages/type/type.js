@@ -18,12 +18,18 @@ Page({
   async onLoad(){
     var openid=wx.getStorageSync("openid")
     var result=await get("class",{_openid:openid});
-    console.log(result);
     this.setData({
       types:result.data
     })
     
-  }
+  },
+   //跳转到list列表页
+   async toTypeList(e) {
+    // console.log(e)
+    wx.navigateTo({
+      url: '../list/list?id=' + e.currentTarget.id,
+    })
+  },
 
  
 })

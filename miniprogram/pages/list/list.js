@@ -14,7 +14,6 @@ Page({
   },
   //加载页面数据
   async onLoad(e) {
-    console.log(e);
     if (e.keyword) {
       var keyword = e.keyword;
       var result = await search("menu", keyword).catch(err => {
